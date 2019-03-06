@@ -11,7 +11,7 @@ use gl_rasterization_context;
 use skia;
 
 use euclid::Size2D;
-use gl_context_wgl::glutin::GlContext;
+use gl_context_wgl::glutin::ContextTrait;
 use gleam::gl;
 use std::ptr;
 use std::rc::Rc;
@@ -52,7 +52,7 @@ impl GLPlatformContext {
         unsafe {
             let events_loop = glutin::EventsLoop::new();
             let context = glutin::ContextBuilder::new();
-            let cx = glutin::Context::new(&events_loop, context, true).unwrap();
+            let cx = glutin::Context::new(&events_loop, context).unwrap();
             cx.make_current().expect("make_current failed");
 
             let gl_interface = skia::SkiaGrGLCreateNativeInterface();
