@@ -13,8 +13,10 @@
 #include <windows.h>
 
 SkNativeGLContext::AutoContextRestore::AutoContextRestore() {
+/*
     fOldHGLRC = wglGetCurrentContext();
     fOldHDC = wglGetCurrentDC();
+   */
 }
 
 SkNativeGLContext::AutoContextRestore::~AutoContextRestore() {

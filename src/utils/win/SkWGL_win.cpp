@@ -199,6 +199,10 @@ void destroy_dummy_window(HWND dummy) {
 }
 }
 
+void * wglGetProcAddress(char* x) {
+	return NULL;
+}
+
 #define GET_PROC(NAME, SUFFIX) f##NAME = \
                      (NAME##Proc) wglGetProcAddress("wgl" #NAME #SUFFIX)
 
@@ -209,7 +213,7 @@ SkWGLExtensions::SkWGLExtensions()
     , fGetPixelFormatAttribiv(NULL)
     , fCreateContextAttribs(NULL) {
     HDC prevDC = wglGetCurrentDC();
-    HGLRC prevGLRC = wglGetCurrentContext();
+    HGLRC prevGLRC = NULL; // wglGetCurrentContext();
 
     PIXELFORMATDESCRIPTOR dummyPFD;
 
@@ -252,7 +256,7 @@ HGLRC SkCreateWGLContext(HDC dc, int msaaSampleCount, bool preferCoreProfile) {
     }
 
     HDC prevDC = wglGetCurrentDC();
-    HGLRC prevGLRC = wglGetCurrentContext();
+    HGLRC prevGLRC = NULL; // wglGetCurrentContext();
     PIXELFORMATDESCRIPTOR pfd;
 
     int format = 0;

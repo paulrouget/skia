@@ -38,9 +38,11 @@ public:
         if (NULL != (proc = (GrGLFuncPtr) GetProcAddress(fGLLib.get(), name))) {
             return proc;
         }
+	/*
         if (NULL != (proc = (GrGLFuncPtr) wglGetProcAddress(name))) {
             return proc;
         }
+	*/
         return NULL;
     }
 
@@ -50,7 +52,7 @@ private:
 
 static GrGLFuncPtr win_get_gl_proc(void* ctx, const char name[]) {
     SkASSERT(NULL != ctx);
-    SkASSERT(NULL != wglGetCurrentContext());
+    SkASSERT(NULL != NULL /*wglGetCurrentContext()*/);
     const GLProcGetter* getter = (const GLProcGetter*) ctx;
     return getter->getProc(name);
 }
@@ -61,7 +63,7 @@ static GrGLFuncPtr win_get_gl_proc(void* ctx, const char name[]) {
  * Otherwise, a springboard would be needed that hides the calling convention.
  */
 const GrGLInterface* GrGLCreateNativeInterface() {
-    if (NULL == wglGetCurrentContext()) {
+    if (NULL == /* wglGetCurrentContext() */ NULL) {
         return NULL;
     }
 
